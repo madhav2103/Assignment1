@@ -1,0 +1,24 @@
+import java.util.Stack;
+
+public class DatingSchedule {
+    private static final int TOTAL_DAYS = 10;
+    private static final int NUM_FRIENDS = 5;
+
+    public static void main(String[] args) {
+        Stack<String> schedule = new Stack<>();
+
+        // Create the initial schedule
+        for (int i = 1; i <= NUM_FRIENDS; i++) {
+            schedule.push("Friend " + i);
+        }
+
+        // Run the round-robin scheduling algorithm
+        for (int day = 1; day <= TOTAL_DAYS; day++) {
+            for (int i = 0; i < NUM_FRIENDS; i++) {
+                String friend = schedule.pop();
+                System.out.println("Day " + day + ": John is dating " + friend);
+                schedule.add(0, friend);
+            }
+        }
+    }
+}
