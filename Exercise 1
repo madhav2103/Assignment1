@@ -1,0 +1,90 @@
+class Student {
+    String name;
+    int id;
+    double grade;
+
+    public Student(String name, int id, double grade) {
+        this.name = name;
+        this.id = id;
+        this.grade = grade;
+    }
+}
+
+class Node {
+    Student student;
+    Node next;
+    Node prev;
+
+    public Node(Student student) {
+        this.student = student;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+public class StudentLinkedList {
+    private Node head;
+    private Node tail;
+
+    public StudentLinkedList() {
+        this.head = null;
+        this.tail = null;
+    }
+
+    public void addStudent(Student student) {
+        Node newNode = new Node(student);
+        if (head == null) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail.next = newNode;
+            newNode.prev = tail;
+            tail = newNode;
+        }
+    }
+
+    public void printForward() {
+        Node current = head;
+        while (current != null) {
+            System.out.println("Name: " + current.student.name +
+                    ", ID: " + current.student.id +
+                    ", Grade: " + current.student.grade);
+            current = current.next;
+        }
+    }
+
+    public void printBackward() {
+        Node current = tail;
+        while (current != null) {
+            System.out.println("Name: " + current.student.name +
+                    ", ID: " + current.student.id +
+                    ", Grade: " + current.student.grade);
+            current = current.prev;
+        }
+    }
+
+    public void printStudentsInReverse() {
+        printBackward();
+    }
+
+    // You can add other methods like search, delete, etc. if needed.
+}
+
+public class Main {
+    public static void main(String[] args) {
+        StudentLinkedList list = new StudentLinkedList();
+
+        list.addStudent(new Student("Priya purohit", 56325635, 88.5));
+        list.addStudent(new Student("Abhinav Jindal", 45632536, 75.0));
+        list.addStudent(new Student("Abhishek Kumar", 78953695, 64.9));
+
+        System.out.println("Printing Students Forward:");
+        list.printForward();
+
+        System.out.println("\nPrinting Students Backward:");
+        list.printBackward();
+
+        System.out.println("\nPrinting Students in Reverse:");
+        list.printStudentsInReverse();
+    }
+}
