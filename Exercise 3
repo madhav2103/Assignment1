@@ -1,0 +1,95 @@
+class Patient {
+    String name;
+    int age;
+    String ailment;
+
+    public Patient(String name, int age, String ailment) {
+        this.name = name;
+        this.age = age;
+        this.ailment = ailment;
+    }
+}
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class PatientQueue {
+    private Queue<Patient> queue;
+
+    public PatientQueue() {
+        queue = new LinkedList<>();
+    }
+
+    public void enqueue(Patient patient) {
+        queue.add(patient);
+    }
+
+    public Patient dequeue() {
+        return queue.poll();
+    }
+
+    public boolean isEmpty() {
+        return queue.isEmpty();
+    }
+}
+
+class Athlete {
+    String name;
+    int age;
+    String sport;
+
+    public Athlete(String name, int age, String sport) {
+        this.name = name;
+        this.age = age;
+        this.sport = sport;
+    }
+}
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        PatientQueue patientQueue = new PatientQueue();
+
+        List<Athlete> athletes = createAthletesList();
+
+        // Loop to iterate over the List and print details of each athlete
+        for (Athlete athlete : athletes) {
+            System.out.println("Name: " + athlete.name +
+                    ", Age: " + athlete.age +
+                    ", Sport: " + athlete.sport);
+
+            // Add each athlete as a patient to the queue
+            Patient patient = new Patient(athlete.name, athlete.age, "None");
+            patientQueue.enqueue(patient);
+        }
+
+        // Verify the patients in the queue
+        System.out.println("\nPatients in the Queue:");
+        while (!patientQueue.isEmpty()) {
+            Patient patient = patientQueue.dequeue();
+            System.out.println("Name: " + patient.name +
+                    ", Age: " + patient.age +
+                    ", Ailment: " + patient.ailment);
+        }
+    }
+
+    private static List<Athlete> createAthletesList() {
+        List<Athlete> athletes = new ArrayList<>();
+
+        // Create 10 Athletes and add them to the list
+        athletes.add(new Athlete("Mo Farah", 35, "Running"));
+        athletes.add(new Athlete("Almaz Ayana", 28, "Running"));
+        athletes.add(new Athlete("Michael", 30, "Baseball"));
+        athletes.add(new Athlete("Sanya Mirza", 22, "Tennis"));
+        athletes.add(new Athlete("Dipa karmakar", 27, "Gymnastic"));
+        athletes.add(new Athlete("Sajan Prakash", 24, "Swimming"));
+        athletes.add(new Athlete("Robert Lewandowski", 26, "Soccer"));
+        athletes.add(new Athlete("Rio de janero", 29, "Badminton"));
+        athletes.add(new Athlete("Scott Bedgood", 23, "Volleyball"));
+        athletes.add(new Athlete("Neeraj chopra", 31, "Javelin Throw"));
+
+        return athletes;
+    }
+}
