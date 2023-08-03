@@ -1,0 +1,65 @@
+class Book {
+    String title;
+    String author;
+    String isbn;
+
+    public Book(String title, String author, String isbn) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+    }
+}
+
+import java.util.Stack;
+
+public class BookStack {
+    private static final int MAX_SIZE = 10;
+    private Stack<Book> stack;
+
+    public BookStack() {
+        stack = new Stack<>();
+    }
+
+    public void push(Book book) {
+        if (stack.size() >= MAX_SIZE) {
+            System.out.println("Stack is full. Cannot add more books.");
+        } else {
+            stack.push(book);
+        }
+    }
+
+    public void pop() {
+        if (!stack.isEmpty()) {
+            stack.pop();
+        } else {
+            System.out.println("Stack is empty. No book to remove.");
+        }
+    }
+
+    public void walkAndReportTitles() {
+        System.out.println("Titles of Books in the Stack:");
+        for (Book book : stack) {
+            System.out.println(book.title);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        BookStack bookStack = new BookStack();
+
+        bookStack.push(new Book("Getting Things Done: The Art of Stress-Free Productivity", "David Allen", "2003"));
+        bookStack.push(new Book("The Intelligent Investor", "Benjamin Graham", "1989"));
+        bookStack.push(new Book("Steve Jobs", "Walter Isaacson", "2005"));
+        bookStack.push(new Book("Made to Stick", "Chip Heath and Dan Heath", "2009"));
+        bookStack.push(new Book("Blue Ocean Strategy", "W. Chan Kim and Renée Mauborgne", "1999"));
+        bookStack.push(new Book("Influence: The Psychology of Persuasion", "Robert B. Cialdini", "2003"));
+        bookStack.push(new Book("The Power of Habit", "Charles Duhigg", "2009"));
+        bookStack.push(new Book("Shoe Dog", "Phil Knight", "2012"));
+        bookStack.push(new Book("Never Split the Difference", "Chris Voss" "2015"));
+        bookStack.push(new Book("Good to Great", "James C. Collins", "2014"));
+        // Add more books as needed
+
+        bookStack.walkAndReportTitles();
+    }
+}
