@@ -1,0 +1,64 @@
+import java.util.Stack;
+
+public class BookStack {
+    private Stack<Book> stack;
+
+    public BookStack() {
+        stack = new Stack<>();
+    }
+
+    public void push(Book book) {
+        stack.push(book);
+    }
+
+    public Book pop() {
+        if (!stack.isEmpty()) {
+            return stack.pop();
+        } else {
+            System.out.println("Stack is empty. No book to remove.");
+            return null;
+        }
+    }
+
+    public Book popUntilAuthor(String author) {
+        Stack<Book> tempStack = new Stack<>();
+        Book bookToFind = null;
+
+        while (!stack.isEmpty()) {
+            Book currentBook = stack.pop();
+            if (currentBook.author.equals(author)) {
+                bookToFind = currentBook;
+                break;
+            } else {
+                tempStack.push(currentBook);
+            }
+        }
+
+        // Restore the remaining books back to the original stack
+        while (!tempStack.isEmpty()) {
+            stack.push(tempStack.pop());
+        }
+
+        return bookToFind;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        BookStack bookStack = new BookStack();
+
+        bookStack.push(new Book("Book1", "Author1", "ISBN1"));
+        bookStack.push(new Book("Book2", "Author2", "ISBN2"));
+        bookStack.push(new Book("Book3", "Author3", "ISBN3"));
+        bookStack.push(new Book("Book4", "Author2", "ISBN4"));
+
+        String authorToFind = "Author2";
+        Book book = bookStack.popUntilAuthor(authorToFind);
+
+        if (book != null) {
+            System.out.println("Found Book with Author " + authorToFind + ": " + book.title);
+        } else {
+            System.out.println("No Book found with Author " + authorToFind);
+        }
+    }
+}
